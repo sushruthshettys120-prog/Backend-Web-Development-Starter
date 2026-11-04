@@ -37,7 +37,9 @@ app.use((error, req, res, next) => {
   return res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Internal server error' } });
 });
 
-const port = Number(process.env.PORT || 3000);
-app.listen(port, () => console.log(`RBAC starter listening on ${port}`));
+if (require.main === module) {
+  const port = Number(process.env.PORT || 3000);
+  app.listen(port, () => console.log(`RBAC starter listening on ${port}`));
+}
 
 module.exports = app;
