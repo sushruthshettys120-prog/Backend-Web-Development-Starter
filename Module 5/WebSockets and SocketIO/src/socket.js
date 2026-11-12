@@ -29,6 +29,11 @@ function initSocket(httpServer) {
       io.to(data.room).emit('commentAdded', data);
     });
 
+    // Handle new posts and broadcast to the room
+    socket.on('newPost', (data) => {
+      io.to(data.room).emit('postCreated', data);
+    });
+
     // Handle client disconnection
     socket.on('disconnect', (reason) => {
       console.log(`[-] disconnected: ${socket.id} (${reason})`);
